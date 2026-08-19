@@ -1,5 +1,5 @@
 create database BankingDB;
-
+show tables;
 use BankingDB;
 
 CREATE TABLE Customers (
@@ -11,7 +11,7 @@ CREATE TABLE Customers (
     AccountCreationDate DATE
 );
 
-desc customers;
+desc transactions;
 
 CREATE TABLE Accounts (
     AccountID INT,
@@ -57,32 +57,48 @@ CHECK (Balance >= 1000);
 
 DROP TABLE AccountBranches;
 
-ALTER TABLE Accounts
-ADD CustomerID INT;
-
+-- creation of forgien coloumn
+alter table accounts add customerID int;
+ 
+-- Accounts → Customers
 ALTER TABLE Accounts
 ADD CONSTRAINT FK_Accounts_Customers
 FOREIGN KEY (CustomerID)
 REFERENCES Customers(CustomerID);
 
-ALTER TABLE Customers
-MODIFY FirstName VARCHAR(50) NOT NULL;
+-- creation of forgien coloumn 
 
-ALTER TABLE Customers
-ADD CONSTRAINT uq_Email UNIQUE (Email);
+alter table accounts add branchID int;
 
+ALTER TABLE Branches
+ADD PRIMARY KEY (BranchID);
 
-
-desc Branches;
-
-alter table branches add primary key (BranchID);
-
-alter table transactions add BranchID int;
-
-ALTER TABLE Transactions
+-- Accounts → Branches
+ALTER TABLE Accounts
 ADD CONSTRAINT FK_Accounts_Branches
 FOREIGN KEY (BranchID)
 REFERENCES Branches(BranchID);
 
-alter table transactions add BranchID int;
+-- updating of accountid to primary key
+ALTER TABLE Accounts
+ADD PRIMARY KEY (AccountID);
+ 
+-- Transactions → Accounts
+ALTER TABLE Transactions
+ADD CONSTRAINT FK_Transactions_Accounts
+FOREIGN KEY (AccountID)
+REFERENCES Accounts(AccountID);
+
+-- creation of new forgien coloumn 
+alter table loans add customerID int;
+
+-- Loans → Customers
+ALTER TABLE Loans
+ADD CONSTRAINT FK_Loans_Customers
+FOREIGN KEY (CustomerID)
+REFERENCES Customers(CustomerID);
+
+desc customers;
+
+select * from customers;
 
