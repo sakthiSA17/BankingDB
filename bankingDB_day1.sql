@@ -11,7 +11,7 @@ CREATE TABLE Customers (
     AccountCreationDate DATE
 );
 
-desc transactions;
+desc TRANSACTIONS;
 
 CREATE TABLE Accounts (
     AccountID INT,
@@ -100,5 +100,5 @@ REFERENCES Customers(CustomerID);
 
 desc customers;
 
-select * from customers;
+select * from TRANSACTIONS;
 

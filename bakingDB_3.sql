@@ -54,5 +54,5 @@ WHERE TransactionID = 402;
 DELETE FROM Accounts
 WHERE AccountID = 202;
 
-SELECT * FROM Accounts;
+SELECT * FROM transactions;
 
