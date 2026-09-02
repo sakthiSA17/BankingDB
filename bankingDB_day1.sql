@@ -101,4 +101,3 @@ REFERENCES Customers(CustomerID);
 desc customers;
 
 select * from TRANSACTIONS;
-
